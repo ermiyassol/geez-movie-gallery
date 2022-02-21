@@ -1,0 +1,125 @@
+<nz-tabset>
+
+	<nz-tab nzTitle="Form">
+		<h3>Movie {{editMode ? 'Updating': 'Adding'}} Form</h3>
+		<form
+			nz-form
+			[formGroup]="validateForm"
+			class="login-form"
+			(ngSubmit)="submitForm()"
+		>
+			<nz-form-item nz-col nzSpan="24" [nzMd]="{ span: 6 }">
+				<nz-form-control nzErrorTip="Please input Movie code!">
+					<nz-input-group nzPrefixIcon="form">
+						<input
+							type="text"
+							nz-input
+							formControlName="code"
+							placeholder="Code"
+							[nzAutocomplete]="auto"
+						/>
+						<nz-autocomplete
+							[nzDataSource]="options"
+							nzBackfill
+							#auto
+						></nz-autocomplete>
+					</nz-input-group>
+				</nz-form-control>
+			</nz-form-item>
+
+			<nz-form-item nz-col nzSpan="24" [nzMd]="{ span: 6 }">
+				<nz-form-control nzErrorTip="Please input Movie Tile!">
+					<nz-input-group nzPrefixIcon="form">
+						<input
+							type="text"
+							nz-input
+							formControlName="title"
+							placeholder="Movie Title"
+						/>
+					</nz-input-group>
+				</nz-form-control>
+			</nz-form-item>
+
+			<nz-form-item nz-col nzSpan="24" [nzMd]="{ span: 6 }">
+				<nz-form-control nzErrorTip="Please input Movie Released Year!">
+					<nz-input-group nzPrefixIcon="form">
+						<input
+							type="text"
+							nz-input
+							formControlName="year"
+							placeholder="Movie Released Year"
+						/>
+					</nz-input-group>
+				</nz-form-control>
+			</nz-form-item>
+
+			<nz-form-item nz-col nzSpan="24" [nzMd]="{ span: 6 }">
+				<nz-form-control nzErrorTip="Please input Movie Poster Url!">
+					<nz-input-group nzPrefixIcon="form">
+						<input
+							type="text"
+							nz-input
+							formControlName="url"
+							placeholder="Movie Poster Url"
+						/>
+					</nz-input-group>
+				</nz-form-control>
+			</nz-form-item>
+
+			<p *ngIf="!editMode">Genre</p>
+			<nz-checkbox-wrapper style="width: 100%;" (nzOnChange)="log($event)">
+				<div nz-row>
+					<div nz-col>
+						<label nz-checkbox nzValue="Adventure">Adventure</label>
+					</div>
+					<div nz-col>
+						<label nz-checkbox nzValue="Animation">Animation</label>
+						<!-- [ngModel]="genreLists.includes('Adventure') && editMode" -->
+					</div>
+					<div nz-col><label nz-checkbox nzValue="Action">Action</label></div>
+					<div nz-col><label nz-checkbox nzValue="Comedy">Comedy</label></div>
+					<div nz-col><label nz-checkbox nzValue="Crime">Crime</label></div>
+					<div nz-col>
+						<label nz-checkbox nzValue="Documentary">Documentary</label>
+					</div>
+					<div nz-col><label nz-checkbox nzValue="Drama">Drama</label></div>
+					<div nz-col><label nz-checkbox nzValue="Family">Family</label></div>
+					<div nz-col><label nz-checkbox nzValue="Fantasy">Fantasy</label></div>
+					<div nz-col><label nz-checkbox nzValue="Horror">Horror</label></div>
+					<div nz-col>
+						<label nz-checkbox nzValue="Melodramas">Melodramas</label>
+					</div>
+					<div nz-col><label nz-checkbox nzValue="Music">Music</label></div>
+					<div nz-col><label nz-checkbox nzValue="Mystery">Mystery</label></div>
+					<div nz-col><label nz-checkbox nzValue="Romance">Romance</label></div>
+					<div nz-col><label nz-checkbox nzValue="Sci-Fi">Sci-Fi</label></div>
+					<div nz-col><label nz-checkbox nzValue="Sports">Sports</label></div>
+					<div nz-col>
+						<label nz-checkbox nzValue="Thriller">Thriller</label>
+					</div>
+					<div nz-col><label nz-checkbox nzValue="War">War</label></div>
+					<div nz-col>
+						<label nz-checkbox nzValue="Westerns">Westerns</label>
+					</div>
+					<div nz-col><label nz-checkbox nzValue="Other">Other</label></div>
+				</div>
+			</nz-checkbox-wrapper>
+			<br />
+			<br />
+			<button
+				nz-col
+				nzSpan="24"
+				[nzSm]="{ span: 24 }"
+				nz-button
+				class="login-form-button login-form-margin"
+				[nzType]="'primary'"
+			>
+				{{editMode ? 'Update' : 'Add'}} Movie
+			</button>
+		</form>
+	</nz-tab>
+  <nz-tab nzTitle="API">
+		<h3>Movie Adding API</h3>
+		<app-movie-adding-api></app-movie-adding-api>
+	</nz-tab>
+</nz-tabset>

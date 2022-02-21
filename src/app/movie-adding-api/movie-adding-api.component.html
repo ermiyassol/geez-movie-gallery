@@ -1,0 +1,121 @@
+<div nz-row>
+	<nz-form-item nz-col nzSpan="24" [nzMd]="{ span: 8 }">
+		<nz-form-control nzErrorTip="Please input Movie Tile!">
+			<nz-input-group nzPrefixIcon="form">
+				<input
+					type="text"
+					nz-input
+					[(ngModel)]="movieTitle"
+					placeholder="Movie Title"
+				/>
+			</nz-input-group>
+		</nz-form-control>
+	</nz-form-item>
+
+	<button
+		nz-col
+		nzSpan="24"
+		[nzMd]="{ span: 4}"
+		nz-button
+		[disabled]="movieTitle == ''"
+		class="login-form-button login-form-margin fetch-api"
+		[nzType]="'primary'"
+		(click)="onFetchMovie()"
+	>
+		<i nz-icon nzType="search" nzTheme="outline"></i> Fetch Movie
+	</button>
+</div>
+<nz-divider nzDashed [nzText]="text">
+	<ng-template #text>
+		<i nz-icon nzType="unordered-list"></i>
+		Movie Description
+	</ng-template>
+</nz-divider>
+<app-movie-description
+	[movie]="fetchedMovie"
+	*ngIf="fetchedMovie"
+></app-movie-description>
+
+<!-- description -->
+<div nz-row *ngIf="!errorMessage && fetchedMovie">
+	<img
+		[src]="fetchedMovie.Poster"
+		[alt]="fetchedMovie.Title + 'Poster'"
+		nz-col
+		nzSpan="24"
+		[nzMd]="{ span: 6}"
+	/>
+	<nz-page-header
+		class="site-page-header"
+		nz-col
+		nzSpan="24"
+		[nzMd]="{ span: 18}"
+	>
+		<nz-page-header-title>{{fetchedMovie.Title}}</nz-page-header-title>
+		<nz-page-header-subtitle>({{fetchedMovie.Year}})</nz-page-header-subtitle>
+		<nz-page-header-extra>
+			<button nz-button class="save_btn" nzType="primary" (click)="onSaving()">
+				Save Movie
+			</button>
+		</nz-page-header-extra>
+		<nz-page-header-content>
+			<div class="content">
+				<div class="main">
+					<nz-descriptions nzSize="small" [nzColumn]="2">
+						<nz-descriptions-item nzTitle="Writer" [nzSpan]="1"
+							>{{fetchedMovie.Writer}}</nz-descriptions-item
+						>
+						<nz-descriptions-item nzTitle="Language" [nzSpan]="1"
+							><a>{{fetchedMovie.Language}}</a></nz-descriptions-item
+						>
+						<nz-descriptions-item nzTitle="Country" [nzSpan]="1"
+							>{{fetchedMovie.Country}}</nz-descriptions-item
+						>
+						<nz-descriptions-item nzTitle="Released" [nzSpan]="1"
+							>{{fetchedMovie.Released}}</nz-descriptions-item
+						>
+						<nz-descriptions-item nzTitle="Genre" [nzSpan]="2">
+							{{fetchedMovie.Genre}}
+						</nz-descriptions-item>
+						<nz-descriptions-item nzTitle="Actors" [nzSpan]="2">
+							{{fetchedMovie.Actors}}
+						</nz-descriptions-item>
+						<nz-descriptions-item nzTitle="Plot" [nzSpan]="2">
+							{{fetchedMovie.Plot}}
+						</nz-descriptions-item>
+					</nz-descriptions>
+				</div>
+				<div class="extra">
+					<div>
+						<nz-statistic
+							nzTitle="Rating"
+							[nzValue]="fetchedMovie.imdbRating"
+						></nz-statistic>
+						<nz-statistic
+							nzTitle="Run-Time"
+							[nzValue]="fetchedMovie.Runtime.split(' ')[0]"
+							nzSuffix="Min"
+							style="margin: 0 32px;"
+						></nz-statistic>
+					</div>
+				</div>
+			</div>
+		</nz-page-header-content>
+		<nz-page-header-footer *ngIf="fetchedMovie.Type == 'series'">
+			<nz-tabset [nzSelectedIndex]="1">
+				<nz-tab
+					[nzTitle]="'Series - Total Number Of Seasons: '+ fetchedMovie.totalSeasons"
+				></nz-tab>
+			</nz-tabset>
+		</nz-page-header-footer>
+	</nz-page-header>
+</div>
+
+<!-- error message -->
+<nz-result
+	*ngIf="errorMessage"
+	nzStatus="404"
+	nzTitle="404"
+	nzSubTitle="Sorry, There is not any movie by this name!! Please check the title!!."
+>
+</nz-result>

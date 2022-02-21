@@ -1,0 +1,97 @@
+<div class="wrapper">
+	<div class="card">
+		<img [src]="movie.url" />
+		<div class="descriptions">
+			<h4>{{ movie.code }}</h4>
+			<h3>{{movie.title}}({{ movie.year }})</h3>
+			<span *ngFor="let genre of movie.genre">{{ genre}}, </span>
+			<br />
+
+			<br />
+			<button
+				nz-button
+				nzType="primary"
+				class="edit_btn"
+				(click)="onEdit()"
+				*ngIf="loginStatus"
+			>
+				<i nz-icon nzType="edit"></i>
+				Edit
+			</button>
+			<br />
+			<br />
+			<button
+				nz-button
+				nz-popconfirm
+				nzPopconfirmTitle="Are you sure delete this Movie?"
+				nzPopconfirmPlacement="bottom"
+				(nzOnConfirm)="onDelete()"
+				nzType="primary"
+				class="delete_btn"
+				*ngIf="loginStatus"
+			>
+				<i nz-icon nzType="delete"></i>
+				Delete
+			</button>
+
+			<!-- <button>
+				<i class="fab fa-youtube"></i>
+			</button> -->
+		</div>
+	</div>
+	<!-- <div class="card">
+		<img
+
+		/>
+		<div class="descriptions">
+			<h1>Equalizer 2</h1>
+			<p>
+				If you have a problem and there is nowhere else to turn, the mysterious
+				and elusive Robert McCall will deliver the vigilante justice you seek.
+				This time, however, McCall's past cuts especially close to home when
+				thugs kill Susan Plummer -- his best friend and former colleague. Now
+				out for revenge, McCall must take on a crew of highly trained assassins
+				who'll stop at nothing to destroy him.
+			</p>
+			<button>
+				<i class="fab fa-youtube"></i>
+				Play trailer on YouTube
+			</button>
+		</div>
+	</div> -->
+</div>
+
+<!-- <footer>
+	<p>
+		Created with <i class="fa fa-heart"></i> by
+		<a target="_blank" href="https://codepen.io/ahmadbassamemran/"
+			>Ahmad Emran</a
+		>
+		Follow me :
+		<a target="_blank" href="https://www.instagram.com/ahmadbassamemran/"
+			><i class="fab fa-instagram"></i
+		></a>
+		<a target="_blank" href="https://www.linkedin.com/in/ahmademarn/"
+			><i class="fab fa-linkedin"></i
+		></a>
+		<a target="_blank" href="https://codepen.io/ahmadbassamemran/"
+			><i class="fab fa-codepen"></i
+		></a>
+		<a target="_blank" href="https://dev.to/ahmadbassamemran"
+			><i class="fab fa-dev"></i
+		></a>
+		<a target="_blank" href="https://twitter.com/ahmadbassamemra"
+			><i class="fab fa-twitter-square"></i
+		></a>
+	</p>
+</footer> -->
+
+<!-- <div class="youtubeBtn">
+	<a
+		target="_blank"
+		href="https://www.youtube.com/AhmadEmran?sub_confirmation=1"
+	>
+		<span>Watch on YouTube</span>
+		<i class="fab fa-youtube"></i>
+	</a>
+</div> -->

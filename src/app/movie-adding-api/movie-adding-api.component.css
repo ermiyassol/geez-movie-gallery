@@ -1,0 +1,42 @@
+.fetch-api {
+	margin-left: 5px;
+}
+
+img {
+	width: 200px;
+}
+
+.content {
+	display: flex;
+}
+
+.extra > div {
+	display: flex;
+	width: max-content;
+	justify-content: flex-end;
+}
+
+@media (max-width: 576px) {
+	.content {
+		display: block;
+	}
+
+	.main {
+		width: 100%;
+		margin-bottom: 12px;
+	}
+
+	.extra {
+		width: 100%;
+		margin-left: 0;
+		text-align: left;
+	}
+}
+
+img {
+	height: 300px;
+}
+
+.save_btn {
+	width: 200px;
+}

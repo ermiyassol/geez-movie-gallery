@@ -1,0 +1,103 @@
+<!-- todo some filter radio buttons and check boxes here -->
+<div class="sticky_header">
+	<!-- radio button -->
+	<!-- <div nz-row> -->
+	<nz-radio-group
+		[(ngModel)]="countryValue"
+		nzButtonStyle="solid"
+		(ngModelChange)="basicFilter('country')"
+	>
+		<label nz-radio-button nzValue="ALL">All(ሁሉንም አሳየኝ)</label>
+		<label nz-radio-button nzValue="EN">English(እንግሊዘኛ)</label>
+		<label nz-radio-button nzValue="ET">Amharic(አማርኛ)</label>
+		<label nz-radio-button nzValue="KR">Korean(የኮርያ)</label>
+		<label nz-radio-button nzValue="IN">Indian(የህንድ)</label>
+	</nz-radio-group>
+	<br />
+	<nz-radio-group
+		[(ngModel)]="typeValue"
+		nzButtonStyle="solid"
+		(ngModelChange)="basicFilter('type')"
+		*ngIf="countryValue && countryValue != 'ALL'"
+		class="typeRadio"
+	>
+		<label nz-radio-button nzValue="M">Movie(ወጥ የሆነ)</label>
+		<label nz-radio-button nzValue="S">Series(ተከታታይ)</label>
+	</nz-radio-group>
+	<!-- </div> -->
+	<div nz-row>
+		<nz-checkbox-wrapper style="width: 100%;" (nzOnChange)="log($event)">
+			<div nz-row>
+				<!-- <div nz-col><label nz-checkbox nzValue="Adventure">Adventure</label></div> -->
+				<div nz-col>
+					<label nz-checkbox nzValue="Animation">Animation</label>
+					<!-- [ngModel]="genreLists.includes('Adventure') && editMode" -->
+				</div>
+				<div nz-col><label nz-checkbox nzValue="Action">Action</label></div>
+				<div nz-col><label nz-checkbox nzValue="Comedy">Comedy</label></div>
+				<div nz-col><label nz-checkbox nzValue="Crime">Crime</label></div>
+				<!-- <div nz-col>
+				<label nz-checkbox nzValue="Documentary">Documentary</label>
+			</div> -->
+				<div nz-col><label nz-checkbox nzValue="Drama">Drama</label></div>
+				<div nz-col><label nz-checkbox nzValue="Family">Family</label></div>
+				<!-- <div nz-col><label nz-checkbox nzValue="Fantasy">Fantasy</label></div> -->
+				<div nz-col><label nz-checkbox nzValue="Horror">Horror</label></div>
+				<!-- <div nz-col>
+				<label nz-checkbox nzValue="Melodramas">Melodramas</label>
+			</div> -->
+				<div nz-col><label nz-checkbox nzValue="Music">Music</label></div>
+				<!-- <div nz-col><label nz-checkbox nzValue="Mystery">Mystery</label></div> -->
+				<div nz-col><label nz-checkbox nzValue="Romance">Romance</label></div>
+				<div nz-col><label nz-checkbox nzValue="Sci-Fi">Sci-Fi</label></div>
+				<div nz-col><label nz-checkbox nzValue="Sports">Sports</label></div>
+				<div nz-col><label nz-checkbox nzValue="Thriller">Thriller</label></div>
+				<!-- <div nz-col><label nz-checkbox nzValue="War">War</label></div> -->
+				<!-- <div nz-col><label nz-checkbox nzValue="Westerns">Westerns</label></div>
+			<div nz-col><label nz-checkbox nzValue="Other">Other</label></div> -->
+			</div>
+		</nz-checkbox-wrapper>
+	</div>
+	<br />
+	<div nz-row>
+		<nz-date-picker
+			nz-col
+			nzSpan="24"
+			[nzSm]="{ span: 6 }"
+			nzMode="year"
+			[(ngModel)]="date"
+			(ngModelChange)="onChange()"
+		></nz-date-picker>
+
+		<nz-input-group
+			nz-col
+			nzSpan="24"
+			[nzSm]="{ span: 6 }"
+			[nzSuffix]="suffixIconSearch"
+		>
+			<input
+				type="text"
+				nz-input
+				[(ngModel)]="searchValue"
+				(ngModelChange)="onSearchingMovies()"
+				placeholder="Search Movie"
+			/>
+		</nz-input-group>
+		<ng-template #suffixIconSearch>
+			<i nz-icon nzType="search"></i>
+		</ng-template>
+	</div>
+</div>
+
+<nz-divider class="behind_slider" nzText="Movie List(የፊልሞች ዝርዝር)"></nz-divider>
+<div nz-row class="behind_slider">
+	<div
+		class="poster"
+		nz-col
+		nzSpan="24"
+		[nzMd]="{ span: 4 }"
+		*ngFor="let movie of moviesList"
+	>
+		<app-poster [movie]="movie"></app-poster>
+	</div>
+</div>
